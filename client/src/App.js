@@ -1,40 +1,39 @@
 import React, { Component } from 'react';
 import './App.css';
+import Home from './Home';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ArticlesList from './ArticlesList';
+import ArticleEdit from './ArticleEdit';
+import Api from './Api';
+import NavBar from './NavBar';
+
+const api = new Api();
 
 class App extends Component {
-  state = {
-    isLoading: true,
-    blog: []
-  };
-
-  async componentDidMount() {
-    const response = await fetch('/api/articles');
-    const body = await response.json();
-    console.log(response)
-    this.setState({blog: body, isLoading: false});
-  }
 
   render() {
-    const {blog, isLoading} = this.state;
-
-    if (isLoading) {
-      return <p>Loading...</p>;
-    }
+    const navbar = <NavBar/>;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <div className="App-intro">
-            <h2>Blog List</h2>
-            {blog.map(blog =>
-              <div key={blog.id}>
-                {blog.title} - {blog.content}
-              </div>
-            )}
-          </div>
-        </header>
-      </div>
-    );
+      <Router>
+        <Switch>
+          <Route
+            path='/'
+            exact={true}
+            render={(props) => <Home {...props} api={api} navbar={navbar}/>}
+          />
+          <Route
+            path='/articles'
+            exact={true}
+            render={(props) => <ArticlesList {...props} api={api} navbar={navbar}/>}
+          />
+          <Route
+            path='/articles/:id'
+            render={(props) => <ArticleEdit {...props} api={api} navbar={navbar}/>}
+          />
+        </Switch>
+      </Router>
+    )
   }
 }
 
