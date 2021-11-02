@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { ArrowRightIcon } from "@heroicons/react/solid";
 
 class NavBar extends Component {
 
@@ -17,21 +18,30 @@ class NavBar extends Component {
   }
 
   render() {
-    return <Navbar color="light" light expand="md">
-      <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
-      <NavbarToggler onClick={this.toggle}/>
-      <Collapse isOpen={this.state.isOpen} navbar>
-        <Nav className="ml-auto" navbar>
-          <NavItem>
-            <NavLink
-              href="https://twitter.com/oktadev">@oktadev</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="https://github.com/oktadeveloper/okta-kotlin-react-crud-example">GitHub</NavLink>
-          </NavItem>
-        </Nav>
-      </Collapse>
-    </Navbar>;
+    return (
+      <Navbar color="light" light expand="md">
+        <NavbarBrand tag={Link} to="/">
+          Home
+        </NavbarBrand>
+        <NavbarBrand tag={Link} to="/Articles">
+          Blogs
+        </NavbarBrand>
+
+        <NavbarToggler onClick={this.toggle} />
+        <Collapse isOpen={this.state.isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink href="https://www.linkedin.com/in/nick-c-ang/">
+                LinkedIn
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="https://github.com/nick-ang">GitHub</NavLink>
+            </NavItem>
+          </Nav>
+        </Collapse>
+      </Navbar>
+    );
   }
 }
 

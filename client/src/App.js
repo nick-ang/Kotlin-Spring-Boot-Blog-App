@@ -14,7 +14,9 @@ class App extends Component {
   render() {
     const navbar = <NavBar/>;
 
+
     return (
+
       <Router>
         <Switch>
           <Route
